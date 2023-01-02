@@ -18,9 +18,26 @@ func RegisterSuccess() *CustomSuccess {
 func LoginSuccess(payload interface{}) *CustomSuccess {
 	return &CustomSuccess{
 		BaseResponse: BaseResponse{
-			StatusCode: http.StatusCreated,
+			StatusCode: http.StatusOK,
 			Message:    string(MSG_LoginSuccess),
 		},
 		Payload: payload,
+	}
+}
+func GetProfileSuccess(payload interface{}) *CustomSuccess {
+	return &CustomSuccess{
+		BaseResponse: BaseResponse{
+			StatusCode: http.StatusOK,
+			Message:    string(MSG_GetProfileSuccess),
+		},
+		Payload: payload,
+	}
+}
+func CreateProfileSuccess() *CustomSuccess {
+	return &CustomSuccess{
+		BaseResponse: BaseResponse{
+			StatusCode: http.StatusCreated,
+			Message:    string(MSG_CreateProfileSuccess),
+		},
 	}
 }

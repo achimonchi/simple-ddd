@@ -14,6 +14,8 @@ type AdditionalInfo struct {
 type Message string
 
 const (
+	MSG_GeneralError Message = "GENERAL ERROR"
+
 	MSG_CreateSuccess Message = "CREATE SUCCESS"
 	MSG_CreateError   Message = "CREATE ERROR"
 
@@ -22,4 +24,10 @@ const (
 
 	MSG_LoginSuccess Message = "LOGIN SUCCESS"
 	MSG_LoginError   Message = "LOGIN ERROR"
+
+	MSG_GetProfileSuccess Message = "GET PROFILE SUCCESS"
+	MSG_GetProfileError   Message = "GET PROFILE ERROR"
+
+	MSG_CreateProfileSuccess Message = "CREATE PROFILE SUCCESS"
+	MSG_CreateProfileError   Message = "CREATE PROFILE ERROR"
 )

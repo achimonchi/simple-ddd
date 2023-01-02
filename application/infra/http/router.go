@@ -15,12 +15,13 @@ type Router struct {
 // Run implements infra.Infra
 func (r *Router) Run() {
 	v1 := r.router.Group("v1")
+	middleware := NewMiddleware()
 
 	// register all routes
 	rAuth := authRoute.NewRouterHttp(v1)
 	rAuth.RegisterRoute()
 
-	rUser := userRoute.NewRouterHttp(v1)
+	rUser := userRoute.NewRouterHttp(v1, middleware)
 	rUser.RegisterRoute()
 
 	r.router.Run(r.port)
