@@ -40,3 +40,22 @@ func (a authHandler) signUp(c *fiber.Ctx) error {
 
 	return WriteSuccess(c, resp, http.StatusCreated)
 }
+
+func (a authHandler) signIn(c *fiber.Ctx) error {
+	var req login
+	if err := c.BodyParser(&req); err != nil {
+		return WriteError(c, err)
+	}
+
+	model, err := NewAuth().FromLogin(req)
+	if err != nil {
+		return WriteError(c, err)
+	}
+
+	item, err := a.svc.login(c.UserContext(), model)
+	if err != nil {
+		return WriteError(c, err)
+	}
+
+	return WriteSuccess(c, item, http.StatusOK)
+}

@@ -11,6 +11,6 @@ func Run(router fiber.Router) {
 	auth := router.Group("auth")
 	{
 		auth.Post("/signup", handler.signUp)
-		// auth.Post("/signin")
+		auth.Post("/signin", handler.signIn)
 	}
 }
