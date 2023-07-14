@@ -5,7 +5,8 @@ import (
 )
 
 func Run(router fiber.Router) {
-	svc := newService()
+	memmoryRepo := newMemmory()
+	svc := newService(memmoryRepo)
 	handler := newHandler(svc)
 	auth := router.Group("auth")
 	{

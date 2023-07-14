@@ -2,6 +2,7 @@ package auth
 
 import (
 	"log"
+	"net/http"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -20,13 +21,22 @@ func (a authHandler) signUp(c *fiber.Ctx) error {
 	var req register
 
 	if err := c.BodyParser(&req); err != nil {
-		return fiber.ErrBadRequest
+		return WriteError(c, err)
 	}
 
-	item, err := a.svc.register(c.UserContext(), req)
+	model, err := NewAuth().FromRegister(req)
 	if err != nil {
 		log.Println(err)
-		return fiber.ErrInternalServerError
+		return WriteError(c, err)
 	}
-	return c.JSON(item)
+
+	item, err := a.svc.register(c.UserContext(), model)
+	if err != nil {
+		log.Println(err)
+		return WriteError(c, err)
+	}
+
+	resp := newRegisterResponse(item)
+
+	return WriteSuccess(c, resp, http.StatusCreated)
 }
